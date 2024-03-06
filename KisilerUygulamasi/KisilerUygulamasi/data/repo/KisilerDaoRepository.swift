@@ -14,39 +14,105 @@ class KisilerDaoRepository{
     
     var kisilerListesi = BehaviorSubject<[Kisiler]>(value: [Kisiler]())
     
+    // veritabanina erişim nesnesi
+    let db:FMDatabase?
+    
+    init(){
+        let hedefYol = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let veritabaniURL = URL(fileURLWithPath: hedefYol).appendingPathComponent("rehber.sqlite")
+        db = FMDatabase(path: veritabaniURL.path)
+    }
+    
+    
     func kaydet(kisi_ad:String, kisi_tel:String){
-        print("Kisi Kaydet : \(kisi_ad) - \(kisi_tel)")
+        db?.open()
+        
+        do{
+            try db?.executeUpdate("INSERT INTO kisiler (kisi_ad,kisi_tel) VALUES (?,?)", values: [kisi_ad,kisi_tel])
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
     }
     
     func guncelle(kisi_id:Int, kisi_ad:String, kisi_tel:String){
-        print("Kisi Guncelle : \(kisi_id) - \(kisi_ad) - \(kisi_tel)")
+        db?.open()
+        
+        do{
+            try db?.executeUpdate("UPDATE kisiler SET kisi_ad = ? , kisi_tel = ? WHERE kisi_id = ?", values: [kisi_ad,kisi_tel,kisi_id])
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
     }
     
     
     func sil(kisi_id:Int){
-        print("Kisi Sil: \(kisi_id)")
-        KisileriYukle()
+        db?.open()
+        
+        do{
+            try db?.executeUpdate("DELETE FROM kisiler WHERE kisi_id=?", values: [kisi_id])
+            KisileriYukle()
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
+        
     }
     
     func ara(aramaSonucu:String){
-        print("Kisi Ara: \(aramaSonucu)")
+        db?.open()
+        
+        var liste = [Kisiler]()
+        
+        do{
+            let rs = try db!.executeQuery("SELECT * FROM kisiler WHERE kisi_ad like '%\(aramaSonucu)%'", values: nil)
+            
+            while rs.next(){
+                let kisi = Kisiler(kisi_id: Int(rs.string(forColumn: "kisi_id"))!,
+                                   kisi_ad: rs.string(forColumn: "kisi_ad")!,
+                                   kisi_tel: rs.string(forColumn: "kisi_tel")!)
+                
+                liste.append(kisi)
+            }
+            
+            kisilerListesi.onNext(liste)// tetikleme ve geri dönüş olayı başladı
+            
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
     }
     
     
     func KisileriYukle(){
         
+        db?.open()
+        
         var liste = [Kisiler]()
-        let k1 = Kisiler(kisi_id: 1, kisi_ad: "Ahmet", kisi_tel: "1111")
-        let k2 = Kisiler(kisi_id: 2, kisi_ad: "Zeynep", kisi_tel: "2222")
-        let k3 = Kisiler(kisi_id: 3, kisi_ad: "Ömer", kisi_tel: "3333")
-        let k4 = Kisiler(kisi_id: 4, kisi_ad: "Safa", kisi_tel: "4444")
         
-        liste.append(k1)
-        liste.append(k2)
-        liste.append(k3)
-        liste.append(k4)
+        do{
+            let rs = try db!.executeQuery("SELECT * FROM kisiler", values: nil)
+            
+            while rs.next(){
+                let kisi = Kisiler(kisi_id: Int(rs.string(forColumn: "kisi_id"))!,
+                                   kisi_ad: rs.string(forColumn: "kisi_ad")!,
+                                   kisi_tel: rs.string(forColumn: "kisi_tel")!)
+                
+                liste.append(kisi)
+            }
+            
+            kisilerListesi.onNext(liste)// tetikleme ve geri dönüş olayı başladı
+            
+        }catch{
+            print(error.localizedDescription)
+        }
         
-        kisilerListesi.onNext(liste)// tetikleme ve geri dönüş olayı başladı
+        db?.close()
         
     }
 }
