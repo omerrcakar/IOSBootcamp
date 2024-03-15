@@ -16,3 +16,14 @@ Bu mimari ile daha profesyonel kodlama yaparız. Büyük projelerde kodlamadaki 
 
 <p>!! <b>RxSwift kurarken Signal SIGABRT hatası alırsanız yapmanız gerekenler ;</b>
 Soldaki Project Navigator menüsünde en üstte projemizin ismini seçip açılan ekrandan, Frameworks, Libraries, and Embedded Content içinde bulunan RxSwift haricindeki tüm dependencies leri sildiğiniz zaman bu hatadan kurtulmuş olucaksınız.</p>
+
+<br>
+
+
+<h1>Firebase:</h1>
+
+<img width="300" height="200" alt="Ekran Resmi 2024-03-02 16 46 55" src="https://github.com/omerrcakar/IOSBootcamp/assets/141220927/3a7fab3c-081f-4025-af0e-7d4ac6c98637">
+<p>Gerçek zamanlı çalışabilen bir veritabanıdır. Veritabanında oluşan değişiklik anlık olarak uygulamaya aktarılabilir.
+<p>No SQL veritabanıdır , klasik sql sorguları çalışmamaktadır.</p>  
+ <p>Webservis ( API ) kullanmanıza gerek yoktur.</p>
+<p>Veriler json modeli ile kullanılmaktadır.</p>
