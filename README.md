@@ -17,7 +17,7 @@ Bu mimari ile daha profesyonel kodlama yaparız. Büyük projelerde kodlamadaki 
 <p>!! <b>RxSwift kurarken Signal SIGABRT hatası alırsanız yapmanız gerekenler ;</b>
 Soldaki Project Navigator menüsünde en üstte projemizin ismini seçip açılan ekrandan, Frameworks, Libraries, and Embedded Content içinde bulunan RxSwift haricindeki tüm dependencies leri sildiğiniz zaman bu hatadan kurtulmuş olucaksınız.</p>
 
-<br>
+
 
 
 <h1>Firebase:</h1>
@@ -27,3 +27,25 @@ Soldaki Project Navigator menüsünde en üstte projemizin ismini seçip açıla
 <p>No SQL veritabanıdır , klasik sql sorguları çalışmamaktadır.</p>  
  <p>Webservis ( API ) kullanmanıza gerek yoktur.</p>
 <p>Veriler json modeli ile kullanılmaktadır.</p>
+
+<br>
+<h1>Restful Mimarisi</h1>
+
+<img width="300" height="300" alt="Ekran Resmi 2024-03-16 15 31 39" src="https://github.com/omerrcakar/IOSBootcamp/assets/141220927/88951496-1b70-4343-821a-024cbc9d4289">
+
+<br>
+<br>
+<br>
+
+<h1>Alamofire</h1>
+<img width="300" height="300" alt="Ekran Resmi 2024-03-16 15 33 28" src="https://github.com/omerrcakar/IOSBootcamp/assets/141220927/f948831b-8481-4a8a-8a06-d90332afef47">
+<br>
+<p>
+ <b>Codable JSON Parse</b>
+ Klasik parse işleminden daha pratikdir
+ Json örneğini nesne tabanlı sınıflara dönüştürüp pratik kullanım sağlar
+ Direk json cevabı liste olarak verilir
+ Gelen bilginin tipine uygun değişkenler oluşturulmalı
+</p>
+
+
