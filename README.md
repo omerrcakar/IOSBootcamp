@@ -48,4 +48,9 @@ Soldaki Project Navigator menüsünde en üstte projemizin ismini seçip açıla
  Gelen bilginin tipine uygun değişkenler oluşturulmalı
 </p>
 
+<h1>Api - Webservis </h1>
+<p>
+ Webservisler internet üzerindeki veritabanindan verileri almamızı sağlayan metotlardır
+ Url olarak çalışırlar
+</p>
 
